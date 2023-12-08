@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b41ab00b158f5f447b89a17b3561dc1f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - target: {instanceID: 0}
+  - expPrefab: {fileID: 78208678329437313, guid: ea335deae936cc74a9ba2495c91cf64c, type: 3}
+  - hitEffectPrefab: {fileID: 5318421549954967080, guid: ed171395475ee0c40950a9493755bd46, type: 3}
+  - magnet: {fileID: 1308063170555144140, guid: 648bc7ec6ddba5544b7e81c84bef6c8e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
