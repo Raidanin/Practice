@@ -1,5 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Bullets : MonoBehaviour
@@ -82,7 +83,7 @@ public class Bullets : MonoBehaviour
         }
     }
 
-    
+
     void DisableObject()
     {
         this.gameObject.SetActive(false);
@@ -188,27 +189,86 @@ public class Bullets : MonoBehaviour
         }
 
         DisableObject();
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        BulletHit(other);
-    }
+        //베지어 곡선 방식으로
+        //    if (initialShurikenTarget == null)
+        //    {
+        //        DisableObject();
+        //        yield break; 
+        //    }
 
-    public void UpdateSwords()
-    {
-        swords = GameObject.FindGameObjectsWithTag("Sword");
-        swordAngles = new float[swords.Length];
-        for (int i = 0; i < swords.Length; i++)
-        {
-            swordAngles[i] = i * (360.0f / swords.Length);
+        //    Vector3 startPosition = transform.position;
+        //    Vector3 targetPosition = initialShurikenTarget.transform.position + new Vector3(0, yOffset, 0);
+
+
+
+        //    float randomHorizontalOffset = Random.Range(-4f, 4f);
+
+        //    Vector3 horizontalBend = player.transform.right * randomHorizontalOffset;
+        //    Vector3 controlPoint1 = startPosition + 0.2f * (targetPosition - startPosition) / 3 + horizontalBend;
+        //    Vector3 controlPoint2 = startPosition + 1.5f * (targetPosition - startPosition) / 3 + horizontalBend;
+
+        //    float rotationSpeed = 720f;
+        //    float rotation = 0f;
+
+        //    for (float t = 0; t <= 1; t += Time.deltaTime * bulletSpeed)
+        //    {
+        //        if (initialShurikenTarget == null || !initialShurikenTarget.activeInHierarchy)
+        //        {
+        //            DisableObject();
+        //            yield break; 
+        //        }
+
+        //       targetPosition = initialShurikenTarget.transform.position + new Vector3(0, yOffset, 0);
+
+        //        transform.position = CalculateBezierPoint(t, startPosition, controlPoint1, controlPoint2, targetPosition);
+
+        //        rotation += rotationSpeed * Time.deltaTime; // Update rotation
+        //        transform.rotation = Quaternion.Euler(0, rotation, 90);
+
+        //        yield return null;
+        //    }
+
+        //    DisableObject();
+
         }
-    }
 
+
+        Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+        {
+            float u = 1 - t;
+            float tt = t * t;
+            float uu = u * u;
+            float uuu = uu * u;
+            float ttt = tt * t;
+
+            Vector3 p = uuu * p0; //first term
+            p += 3 * uu * t * p1; //second term
+            p += 3 * u * tt * p2; //third term
+            p += ttt * p3; //fourth term
+
+            return p;
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            BulletHit(other);
+        }
+
+        public void UpdateSwords()
+        {
+            swords = GameObject.FindGameObjectsWithTag("Sword");
+            swordAngles = new float[swords.Length];
+            for (int i = 0; i < swords.Length; i++)
+            {
+                swordAngles[i] = i * (360.0f / swords.Length);
+            }
+        }
+
+    }
     public enum BulletType
     {
         crossbowArrow,
         sword,
         shuriken,
     }
-}

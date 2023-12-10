@@ -25,6 +25,7 @@ public class Weapon : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         scanner = player.GetComponent<Scanner>();
         playerScript.LevelUpEvent += HandleLevelUpEvent;
+      
 
     }
 
